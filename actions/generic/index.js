@@ -30,25 +30,7 @@ async function main (params) {
     // log parameters, only if params.LOG_LEVEL === 'debug'
     logger.debug(stringParameters(params))
 
-    // check for missing request input parameters and headers
-    const requiredParams = [/* add required params */]
-    const requiredHeaders = ['Authorization']
-    const errorMessage = checkMissingRequestInputs(params, requiredParams, requiredHeaders)
-    if (errorMessage) {
-      // return and log client errors
-      return errorResponse(400, errorMessage, logger)
-    }
-
-    // extract the user Bearer token from the Authorization header
-    //const token = getBearerToken(params)
-   // const token = 'LkLrdbeKOiOhDz047rEP5tAeXNdv8BiKV8B3Eh5u96aec431esdfhgl'
-
-    // replace this with the api you want to access
-    //const apiEndpoint = 'https://adobeioruntime.net/api/v1'
-    //const apiEndpoint = 'https://pimcore-cert.i95-dev.com/pimcore-datahub-webservics/getProductList'
-
     // fetch content from external api endpoint
-    //const res = await fetch(apiEndpoint)
     const pimResponse = await fetch("https://pimcore-cert.i95-dev.com/pimcore-datahub-webservics/getProductList", {
       method: 'GET',
       headers: {
@@ -68,7 +50,6 @@ async function main (params) {
     let outputContent = []
     for (const item of content) {
       // Add each element of the JavaScript object to the array.
-      //productInput.push(item);
       inputSku = item.sku
       productInput = {
         "product" : {
